@@ -2,13 +2,14 @@ import express from "express";
 
 const app = express();
 
-import router from "./routers/window.router.js";
+import { WindowRouter, ColorRouter } from "./routers/index.js";
 
 //Middleware
 app.use(express.json());
 
 // Routes
-app.use("/api/ventana", router);
+app.use("/api/ventana", WindowRouter);
+app.use("/api/colores", ColorRouter);
 
 // Iniciar el servidor
 const PORT = 8080;
