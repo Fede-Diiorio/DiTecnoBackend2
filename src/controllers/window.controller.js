@@ -12,7 +12,7 @@ export default class WindowController {
       const opening = await this.#windowRepository.getOpenings();
       res.json(opening);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(error.status || 500).json(error);
     }
   }
 
@@ -23,7 +23,7 @@ export default class WindowController {
 
       res.json(styles);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(error.status || 500).json(error);
     }
   }
 
@@ -35,7 +35,7 @@ export default class WindowController {
 
       res.json(types);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(error.status || 500).json(error);
     }
   }
 
@@ -49,7 +49,7 @@ export default class WindowController {
 
       res.json(typeSpecification);
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      res.status(error.status || 500).json(error);
     }
   }
 }
