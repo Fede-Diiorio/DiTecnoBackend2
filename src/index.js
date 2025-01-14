@@ -8,7 +8,7 @@ import router from "./routers/window.router.js";
 app.use(express.json());
 
 // Routes
-app.use("/api/window", router);
+app.use("/api/ventana", router);
 
 // Iniciar el servidor
 const PORT = 8080;
