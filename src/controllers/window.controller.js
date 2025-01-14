@@ -38,4 +38,18 @@ export default class WindowController {
       res.status(500).json({ error: error.message });
     }
   }
+
+  async getTypeSpecification(req, res) {
+    try {
+      const opening = req.params.opening;
+      const style = req.params.style;
+      const type = req.params.type;
+      const typeSpecification =
+        await this.#windowRepository.getTypeSpecification(opening, style, type);
+
+      res.json(typeSpecification);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }

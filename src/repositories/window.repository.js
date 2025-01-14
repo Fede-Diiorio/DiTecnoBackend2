@@ -46,4 +46,23 @@ export default class WindowRepository {
     );
     return types;
   }
+
+  async getTypeSpecification(opening, style, type) {
+    const [typeSpecification] = await dbconfig.query(
+      ` SELECT
+          t.name_type,
+          t.slug_type,
+          t.image_link,
+          w.casement_quantity
+        FROM windowss AS w
+        INNER JOIN opening AS o ON (o.id_opening = w.id_opening)
+        INNER JOIN window_styles AS s ON (s.id_style = w.id_style)
+        INNER JOIN window_types AS t ON (t.id_type = w.id_type)
+        WHERE o.slug_opening = ?
+        AND s.slug_style = ?
+        AND t.slug_type = ?;`,
+      [opening, style, type]
+    );
+    return typeSpecification[0];
+  }
 }
