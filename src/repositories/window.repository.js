@@ -1,5 +1,10 @@
-import dbconfig from "../dbconfig.js";
 import WindowDao from "../dao/sql/window.dao.js";
+import {
+  WindowOpeningDTO,
+  WindowStyleDTO,
+  WindowTypeDTO,
+  WindowTypeSpecificationDTO,
+} from "../DTOs/index.js";
 
 export default class WindowRepository {
   #windowDao;
@@ -10,17 +15,22 @@ export default class WindowRepository {
 
   async getOpenings() {
     const opening = await this.#windowDao.getOpening();
-    return opening;
+    const openingPayload = opening.map(
+      (opening) => new WindowOpeningDTO(opening)
+    );
+    return openingPayload;
   }
 
   async getStyles(opening) {
     const styles = await this.#windowDao.getStyles(opening);
-    return styles;
+    const stylesPayload = styles.map((style) => new WindowStyleDTO(style));
+    return stylesPayload;
   }
 
   async getTypes(opening, style) {
     const types = await this.#windowDao.getTypes(opening, style);
-    return types;
+    const typesPayload = types.map((type) => new WindowTypeDTO(type));
+    return typesPayload;
   }
 
   async getTypeSpecification(opening, style, type) {
@@ -29,6 +39,10 @@ export default class WindowRepository {
       style,
       type
     );
-    return typeSpecification;
+    const typeSpecificationPayload = new WindowTypeSpecificationDTO(
+      typeSpecification
+    );
+
+    return typeSpecificationPayload;
   }
 }
