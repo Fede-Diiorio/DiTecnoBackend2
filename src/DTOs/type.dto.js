@@ -1,4 +1,4 @@
-export default class WindowTypeDTO {
+export default class TypeDTO {
   constructor(data) {
     this.id = data.id_type;
     this.name = data.name_type;

@@ -1,4 +1,4 @@
-export default class WindowStyleDTO {
+export default class StyleDTO {
   constructor(data) {
     this.id = data.id_style;
     this.name = data.name_style;

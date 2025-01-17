@@ -1,8 +1,8 @@
 import WindowDao from "../dao/sql/window.dao.js";
 import {
-  WindowOpeningDTO,
-  WindowStyleDTO,
-  WindowTypeDTO,
+  OpeningDTO,
+  StyleDTO,
+  TypeDTO,
   WindowTypeSpecificationDTO,
 } from "../DTOs/index.js";
 import CustomError from "../utils/customErrors.js";
@@ -17,9 +17,7 @@ export default class WindowRepository {
   async getOpenings() {
     try {
       const opening = await this.#windowDao.getOpening();
-      const openingPayload = opening.map(
-        (opening) => new WindowOpeningDTO(opening)
-      );
+      const openingPayload = opening.map((opening) => new OpeningDTO(opening));
 
       return openingPayload;
     } catch (error) {
@@ -50,7 +48,7 @@ export default class WindowRepository {
         });
       }
 
-      const stylesPayload = styles.map((style) => new WindowStyleDTO(style));
+      const stylesPayload = styles.map((style) => new StyleDTO(style));
 
       if (!stylesPayload || stylesPayload.length === 0) {
         throw CustomError.createError({
@@ -91,7 +89,7 @@ export default class WindowRepository {
         });
       }
 
-      const typesPayload = types.map((type) => new WindowTypeDTO(type));
+      const typesPayload = types.map((type) => new TypeDTO(type));
 
       if (!typesPayload || typesPayload.length === 0) {
         throw CustomError.createError({

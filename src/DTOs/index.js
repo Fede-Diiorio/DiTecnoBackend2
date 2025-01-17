@@ -1,13 +1,7 @@
-import WindowOpeningDTO from "./opening.dto.js";
-import WindowStyleDTO from "./windowStyle.dto.js";
-import WindowTypeDTO from "./windowType.dto.js";
+import OpeningDTO from "./opening.dto.js";
+import StyleDTO from "./style.dto.js";
+import TypeDTO from "./type.dto.js";
 import WindowTypeSpecificationDTO from "./windowTypeSpecification.dto.js";
 import ColorDTO from "./color.dto.js";
 
-export {
-  WindowOpeningDTO,
-  WindowStyleDTO,
-  WindowTypeDTO,
-  WindowTypeSpecificationDTO,
-  ColorDTO,
-};
+export { OpeningDTO, StyleDTO, TypeDTO, WindowTypeSpecificationDTO, ColorDTO };
