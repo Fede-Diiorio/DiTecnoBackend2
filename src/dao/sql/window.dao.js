@@ -45,7 +45,12 @@ export default class WindowDao {
         INNER JOIN window_styles AS s ON (s.id_style = w.id_style)
         INNER JOIN window_types AS t ON (t.id_type = w.id_type)
         WHERE o.slug_opening = ? 
-        AND s.slug_style = ?;`,
+        AND s.slug_style = ?
+        GROUP BY
+            t.id_type,
+            t.name_type,
+            t.slug_type,
+            t.image_link;`,
       [opening, style]
     );
     return types;
@@ -54,18 +59,38 @@ export default class WindowDao {
   async getTypeSpecification(opening, style, type) {
     const [typeSpecification] = await db.query(
       ` SELECT
-            t.id_type,
-            t.name_type,
-            t.slug_type,
-            t.image_link,
-            w.casement_quantity
+          t.name_type,
+          t.slug_type,
+          t.image_link,
+          w.casement_quantity,
+          w.min_height,
+          w.max_height,
+          w.min_width,
+          w.max_width,
+          w.min_height_casement,
+          w.max_height_casement,
+          w.min_width_casement,
+          w.max_width_casement
         FROM windowss AS w
         INNER JOIN opening AS o ON (o.id_opening = w.id_opening)
         INNER JOIN window_styles AS s ON (s.id_style = w.id_style)
         INNER JOIN window_types AS t ON (t.id_type = w.id_type)
         WHERE o.slug_opening = ?
         AND s.slug_style = ?
-        AND t.slug_type = ?;`,
+        AND t.slug_type = ?
+        GROUP BY
+          t.name_type,
+          t.slug_type,
+          t.image_link,
+          w.casement_quantity,
+          w.min_height,
+          w.max_height,
+          w.min_width,
+          w.max_width,
+          w.min_height_casement,
+          w.max_height_casement,
+          w.min_width_casement,
+          w.max_width_casement;`,
       [opening, style, type]
     );
     return typeSpecification[0];
