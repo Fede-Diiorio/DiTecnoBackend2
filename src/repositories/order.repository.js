@@ -32,7 +32,6 @@ export default class OrderRepository {
             prod.type,
             prod.design
           );
-          console.log(type);
           products.push(new DoorDTO(prod, type));
         }
       }
@@ -48,7 +47,16 @@ export default class OrderRepository {
       await new MailingService().sendMailToUser(email);
       return userData;
     } catch (error) {
-      console.log(error);
+      throw CustomError.createError({
+        name: error.name || "Al enviar el mail.",
+        cause:
+          error.cause ||
+          "Ocurrió un error al procesar su solicitud y no se pudo cargar los datos de forma correcta.",
+        message:
+          error.message ||
+          "La petición realizada no pudo ser completada debido a un error en la solicitud.",
+        status: error.status || 500,
+      });
     }
   }
 }

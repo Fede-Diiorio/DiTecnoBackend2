@@ -8,6 +8,7 @@ import {
   ColorRouter,
   DoorRouter,
   OrderRouter,
+  SupportRouter,
 } from "./routers/index.js";
 
 //Middleware
@@ -26,6 +27,7 @@ app.use("/api/ventana", WindowRouter);
 app.use("/api/colores", ColorRouter);
 app.use("/api/puerta", DoorRouter);
 app.use("/api/orden", OrderRouter);
+app.use("/api/support", SupportRouter);
 
 // Iniciar el servidor
 const PORT = 8080;
